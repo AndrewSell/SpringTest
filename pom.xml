@@ -1,0 +1,141 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion><!-- maven开头必须是这个字段 -->
+  <groupId>com.github.foltan</groupId><!-- 这个包的开发单位或组织 -->
+  <artifactId>SpringTest</artifactId><!-- 这个程序的名字 -->
+  <packaging>war</packaging><!-- 打包，三个格式war，jar，pom -->
+  <version>0.0.1-SNAPSHOT</version><!-- 版本 -->
+  <name>SpringTest Maven Webapp</name><!-- 名字 -->
+  <url>http://maven.apache.org</url><!-- maven的连接，无需更改，可以不写 -->
+  <properties><!-- 对于该项目的全局配置 -->
+  	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding><!-- 修改项目的编码格式 -->
+  	<spring.version>5.0.0.RELEASE</spring.version>
+  </properties>
+  <dependencies><!-- 我们需要引入的jar包的集合 -->
+  <!-- 引入了junit测试包 -->
+    <dependency><!-- 引入jar包的开头必须有这个 -->
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+    <!-- 引入了spring -->
+    <dependency>
+    	<groupId>org.springframework</groupId>
+    	<artifactId>spring-core</artifactId>
+    	<version>${spring.version}</version>
+    </dependency>
+    <dependency>
+    	<groupId>org.springframework</groupId>
+    	<artifactId>spring-beans</artifactId>
+    	<version>${spring.version}</version>
+    </dependency>
+    <dependency>
+    	<groupId>org.springframework</groupId>
+    	<artifactId>spring-context</artifactId>
+    	<version>${spring.version}</version>
+    </dependency>
+    <dependency>
+    	<groupId>org.springframework</groupId>
+    	<artifactId>spring-tx</artifactId>
+    	<version>${spring.version}</version>
+    </dependency>
+    <dependency>
+    	<groupId>org.springframework</groupId>
+    	<artifactId>spring-web</artifactId>
+    	<version>${spring.version}</version>
+    </dependency>
+    <dependency>
+    	<groupId>org.springframework</groupId>
+    	<artifactId>spring-test</artifactId>
+    	<version>${spring.version}</version>
+    </dependency>
+    <!-- 使用spring MVC配置 -->
+    <dependency>
+    	<groupId>org.springframework</groupId>
+    	<artifactId>spring-webmvc</artifactId>
+    	<version>${spring.version}</version>
+    </dependency>
+    <!-- 引入了servlet的api -->
+    <dependency>
+    	<groupId>javax.servlet</groupId>
+    	<artifactId>javax.servlet-api</artifactId>
+    	<version>4.0.0</version>
+    	<scope>provided</scope>
+	</dependency>
+	<dependency>
+		<groupId>javax.servlet</groupId>
+		<artifactId>jstl</artifactId>
+		<version>1.2</version>
+	</dependency>
+  </dependencies>
+  <build>
+    <finalName>SpringTest</finalName>
+    <plugins>
+    	<plugin>
+    		<groupId>org.apache.maven.plugins</groupId>
+    		<artifactId>maven-surefire-plugin</artifactId>
+    		<version>2.4.2</version>
+    		<configuration>
+    			<skipTests>true</skipTests>
+    		</configuration>
+    	</plugin>
+    	<plugin>
+    		<groupId>org.apache.maven.plugins</groupId>
+    		<artifactId>maven-compiler-plugin</artifactId>
+    		<configuration>
+    			<source>1.8</source>
+    			<target>1.8</target>
+    		</configuration>
+    	</plugin>
+    	<plugin>
+    		<groupId>org.apache.maven.plugins</groupId>
+    		<artifactId>maven-war-plugin</artifactId>
+    		<version>2.3</version>
+    		<configuration>
+    			<webXml>src/main/webapp/WEB-INF/web.xml</webXml>
+    		</configuration>
+    	</plugin>
+    	<!-- generate java doc -->
+    	<plugin>
+    		<groupId>org.apache.maven.plugins</groupId>
+    		<artifactId>maven-javadoc-plugin</artifactId>
+    		<version>2.9.1</version>
+    		<configuration>
+    			<javadocDirectory>target/javadoc</javadocDirectory>
+    			<reportOutputDirectory>target/javadoc</reportOutputDirectory>
+    			<charset>UTF-8</charset>
+    			<encoding>UTF-8</encoding>
+    			<docencoding>UTF-8</docencoding>
+    			<show>private</show>
+    		</configuration>
+    	</plugin>
+    	<!-- 对war包进行部署 -->
+    	<plugin>
+    		<groupId>org.codehaus.cargo</groupId>
+    		<artifactId>cargo-maven2-plugin</artifactId>
+    		<version>1.0</version>
+    		<configuration>
+    			<container>
+    				<containerId>tomcat7x</containerId>
+    				<home>D:\bulidtools\apache-tomcat-7.0.88</home>
+    			</container>
+    			<configuration>
+    				<type>existing</type>
+    				<home>D:\bulidtools\apache-tomcat-7.0.88</home>
+    			</configuration>
+    		</configuration>
+    	</plugin>
+    	<plugin>
+    		<groupId>org.apache.tomcat.maven</groupId>
+    		<artifactId>tomcat7-maven-plugin</artifactId>
+    		<version>2.2</version>
+    		<configuration>
+    			<path>/spring</path>
+    			<port>8080</port>
+    			<server>tomcat7</server>
+    		</configuration>
+    	</plugin>
+    </plugins>
+  </build>
+</project>
