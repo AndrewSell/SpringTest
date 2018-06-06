@@ -1,10 +1,8 @@
 package DbUtils.MySql;
 
-import java.io.File;
+import java.util.List;
 
-import javax.servlet.ServletException;
-
-import test.file.fileUtils;
+import test.file.excel.excelRead;
 
 public class Test {
 	/**
@@ -24,9 +22,25 @@ public class Test {
 //		System.out.println(absolute.getParent());
 		
 		/**
-		 * 读字符文件
+		 * 读写文件
 		 */
-		fileUtils fu = new fileUtils();
-		fu.filebin();
-	}
+//		fileUtils fu = new fileUtils();
+//		fu.filebin();
+		excelRead poi = new excelRead();
+        // List<List<String>> list = poi.read("d:/aaa.xls");
+        List<List<String>> list = poi.read("D:/1.xls");
+        if (list != null) {
+            for (int i = 0; i < list.size(); i++) {
+                System.out.print("第" + (i) + "行");
+                List<String> cellList = list.get(i);
+                for (int j = 0; j < cellList.size(); j++) {
+//                     System.out.print("    第" + (j + 1) + "列值：");
+                    System.out.print("    " + cellList.get(j));
+                }
+                System.out.println();
+            }
+
+        }
+
+    }
 }

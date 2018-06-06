@@ -16,7 +16,7 @@ public class fileUtils {
 		FileInputStream inputStream = null;
 		OutputStream outputStream = null;
 		try {
-			outputStream = new FileOutputStream("1.exe");
+			outputStream = new FileOutputStream("1.txt");
 		} catch (FileNotFoundException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
